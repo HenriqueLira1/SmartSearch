@@ -35,16 +35,16 @@ server.use('/livros*', (req, res, next) => {
 const routes = require('./src/app/routes');
 server.use(routes);
 
-server.use((req, res, next) => {
-  return res.status(404).marko(
-    require('./src/app/views/errors/404.marko')
-  );
-});
+// server.use((req, res, next) => {
+//   return res.status(404).marko(
+//     require('./src/app/views/errors/404.marko')
+//   );
+// });
 
-server.use((error, req, res, next) => {
-  return res.status(500).marko(
-    require('./src/app/views/errors/500.marko')
-  );
-});
+// server.use((error, req, res, next) => {
+//   return res.status(500).marko(
+//     require('./src/app/views/errors/500.marko')
+//   );
+// });
 
 server.listen(3000);
