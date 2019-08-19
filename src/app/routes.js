@@ -8,7 +8,7 @@ const routes = express.Router();
 
 routes.get('/', (req, resp) => {
     resp.marko(
-        require('./views/home/monster-admin-lite-master/template/home.marko')
+        require('./views/home/home.marko')
     );
 });
 
