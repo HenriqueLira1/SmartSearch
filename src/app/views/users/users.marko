@@ -1,0 +1,94 @@
+<html>
+<!-- Head -->
+<include-html('../components/head.html')/>
+<body class="fix-header fix-sidebar card-no-border">
+    
+    <!-- Preloader - style you can find in spinners.css -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
+    </div>
+    
+    <!-- Main wrapper - style you can find in pages.scss -->    
+    <div id="main-wrapper">
+    
+        <!-- Topbar header - style you can find in pages.scss -->        
+        <include-html('../components/header.html')/>
+
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->        
+        <include-html('../components/sidebar.html')/>
+        
+        <div class="page-wrapper">                
+            
+            <div class="container-fluid">
+                
+                <!-- Bread crumbs -->                
+                <div class="row page-titles">
+                    <div class="col-md-6 col-8 align-self-center">
+                        <h3 class="text-themecolor m-b-0 m-t-0">Controle de acesso</h3>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item active">Controle de acesso</li>
+                        </ol>
+                    </div>
+                    <div class="col-md-6 col-4 align-self-center">
+                        <a href="/users/new" class="btn pull-right hidden-sm-down btn-success">Novo usuário</a>
+                    </div>
+                </div>            
+     
+                <!-- Page Content -->
+                <div class="row">                    
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-block">
+                                <h4 class="card-title">Gerenciar</h4>                            
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Nome</th>
+                                                <th>Grupo de acesso</th>
+                                                <th>Gerado em</th>
+                                                <th>Ações</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Fulano</td>
+                                                <td>Administrativo</td>
+                                                <td>data teste</td>
+                                                <td>acoes teste</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ciclano</td>
+                                                <td>Analistas</td>                                                
+                                                <td>data teste</td>
+                                                <td>acoes teste</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Beltrano</td>
+                                                <td>Administrativo</td>                                                
+                                                <td>data teste</td>
+                                                <td>acoes teste</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>        
+                    
+            <!-- footer -->           
+            <include-html('../components/footer.html')/>
+
+        </div>
+    </div>
+
+<!-- scripts -->
+<include-html('../components/scripts.html')/>
+
+</body>
+</html>

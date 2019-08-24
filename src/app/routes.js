@@ -1,7 +1,7 @@
 const express = require('express');
-
-const LivroController = require('./controller/livroController');
-const LoginController = require('./controller/loginController');
+const LivroController = require('./controllers/livroController');
+const LoginController = require('./controllers/loginController');
+const UserController = require('./controllers/UserController');
 const Livro = require('./models/livro');
 
 const routes = express.Router();
@@ -12,12 +12,21 @@ routes.get('/', (req, resp) => {
     );
 });
 
+routes.get('/users', (req, resp) => {
+    resp.marko(
+        require('./views/users/users.marko')
+    );
+});
+
+// routes.route('/users')
+//     .get(UserController.index);
+    
 routes.get('/livros', LivroController.index);
 
 routes.route('/livros/form')
     .get(LivroController.getNew)
-    .post(Livro.validate(), LivroController.store)
-    .put(LivroController.edit);
+    .put(LivroController.edit)
+    .post(Livro.validate(), LivroController.store);
 
 routes.route('/login')
     .get(LoginController.index)

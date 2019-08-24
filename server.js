@@ -2,8 +2,11 @@ require('marko/node-require').install();
 require('marko/express');
 
 const express = require('express');
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+const auth = require('./src/config/auth');
+const routes = require('./src/app/routes');
 const server = express();
 
 server.use('/estatico', express.static('src/app/public'));
@@ -21,7 +24,11 @@ server.use(methodOverride(function (req, res) {
     }
 }));
 
-const auth = require('./src/config/auth');
+mongoose.connect('mongodb+srv://henrique:asdarugina@cluster0-jsaku.mongodb.net/smartsearch?retryWrites=true&w=majority', {
+  useNewUrlParser: true
+});
+
+
 auth(server);
 
 server.use('/livros*', (req, res, next) => {
@@ -32,7 +39,7 @@ server.use('/livros*', (req, res, next) => {
   }
 });
 
-const routes = require('./src/app/routes');
+
 server.use(routes);
 
 // server.use((req, res, next) => {
