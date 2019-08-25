@@ -18,9 +18,30 @@ routes.get('/users', (req, resp) => {
     );
 });
 
-// routes.route('/users')
-//     .get(UserController.index);
-    
+routes.get('/users/new', (req, resp) => {
+    resp.marko(
+        require('./views/users/form/user_form.marko')
+    );
+});
+
+routes.get('/users/edit', (req, resp) => {
+    resp.marko(
+        require('./views/users/form/user_form.marko')
+    );
+});
+
+routes.get('/reports', (req, resp) => {
+    resp.marko(
+        require('./views/reports/reports.marko')
+    );
+});
+
+routes.get('/search', (req, resp) => {
+    resp.marko(
+        require('./views/search/search.marko')
+    );
+});
+
 routes.get('/livros', LivroController.index);
 
 routes.route('/livros/form')
@@ -28,9 +49,9 @@ routes.route('/livros/form')
     .put(LivroController.edit)
     .post(Livro.validate(), LivroController.store);
 
-routes.route('/login')
-    .get(LoginController.index)
-    .post(LoginController.store);
+// routes.route('/login')
+//     .get(LoginController.index)
+//     .post(LoginController.store);
 
 routes.delete('/livros/:id', LivroController.delete);
 

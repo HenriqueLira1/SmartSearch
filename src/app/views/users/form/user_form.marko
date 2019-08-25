@@ -1,0 +1,94 @@
+<html>
+<!-- Head -->
+<include-html('../../components/head.html')/>
+<body class="fix-header fix-sidebar card-no-border">
+    
+    <!-- Preloader - style you can find in spinners.css -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
+    </div>
+    
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <div id="main-wrapper">
+    
+        <!-- Topbar header - style you can find in pages.scss -->
+        <include-html('../../components/header.html')/>
+
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <include-html('../../components/sidebar.html')/>
+        
+        <div class="page-wrapper">
+            
+            <div class="container-fluid">
+                
+                <!-- Bread crumbs -->
+                <div class="row page-titles">
+                    <div class="col-md-6 col-8 align-self-center">
+                        <h3 class="text-themecolor m-b-0 m-t-0">Usuário</h3>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/users">Controle de acesso</a></li>
+                            <li class="breadcrumb-item active">Usuário</li>
+                        </ol>
+                    </div>
+                </div>
+     
+                <!-- Page Content -->
+                <div class="row">                    
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-block">
+                                <form class="form-horizontal form-material">
+                                    <div class="form-group">
+                                        <label class="col-md-12">Nome</label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control form-control-line" name="name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12">Email</label>
+                                        <div class="col-md-12">
+                                            <input type="email" class="form-control form-control-line" name="email">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12">Senha</label>
+                                        <div class="col-md-12">
+                                            <input type="password" class="form-control form-control-line" name="password">
+                                        </div>
+                                    </div>                                   
+                                    <div class="form-group">
+                                        <label class="col-sm-12">Grupo de acesso</label>
+                                        <div class="col-sm-12">
+                                            <select class="form-control form-control-line" name="access_group">
+                                                <option value=""></option>
+                                                <option value="1">Administrativo</option>
+                                                <option value="2">Analista</option>
+                                                <option value="3">Auditor</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <button class="btn btn-success">Salvar</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>                
+            </div>        
+                    
+            <!-- footer -->           
+            <include-html('../../components/footer.html')/>
+
+        </div>
+    </div>
+
+<!-- scripts -->
+<include-html('../../components/scripts.html')/>
+
+</body>
+</html>
