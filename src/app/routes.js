@@ -42,6 +42,12 @@ routes.get('/search', (req, resp) => {
     );
 });
 
+routes.get('/login', (req, resp) => {
+    resp.marko(
+        require('./views/login-new/login.marko')
+    );
+});
+
 routes.get('/livros', LivroController.index);
 
 routes.route('/livros/form')
