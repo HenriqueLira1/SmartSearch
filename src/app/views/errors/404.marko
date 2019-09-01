@@ -1,46 +1,24 @@
 <html>
-<head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="/estatico/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/estatico/css/fontawesome.min.css" />
-    <link rel="stylesheet" href="/estatico/css/casadocodigo.css" />
-</head>
-<body>
-    <header class="cabecalhoPrincipal">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-4">
-                    <h1 class="logo"><img src="/estatico/imagens/logo-casadocodigo.svg" alt="Casa do Código" /></h1>
-                </div>
-                <div class="cabecalhoPrincipal-navegacao col-8">
-                    <a href="#" class="login">
-                        <i class="fas fa-sign-in-alt"></i>Login
-                    </a>
-                </div>
-            </div>
+<!-- Head -->
+<include-html('../components/head.html')/>
+
+<body class="fix-header card-no-border">
+    
+    <section id="wrapper" class="error-page">
+        <div class="error-box">
+            <div class="error-body text-center">
+            
+                <h1>404</h1>
+                <h3 class="text-uppercase">Página não encontrada!</h3>                
+                <a href="/" class="btn btn-info btn-rounded waves-effect waves-light m-b-40">Voltar</a> </div>
+
+             <!-- footer -->
+            <include-html('../components/footer.html')/>
         </div>
-    </header>
-    <main class="conteudoPrincipal">
-        <div class="container">
-            <h1>NOT FOUND</h1>
-            <p>Página não encontrada!</p>
-            <a href="/">Voltar</a>
-        </div>
-    </main>
-    <footer class="rodape">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-4">
-                    <img src="/estatico/imagens/logo-rodape.svg" class="logo-rodape" />
-                </div>
-                <div class="col-8">
-                    <ul class="redesSociais">
-                        <li><a href="http://www.facebook.com/casadocodigo" class="compartilhar-facebook" target="_blank">/CasaDoCodigo</a></li>
-                        <li><a href="http://www.twitter.com/casadocodigo" class="compartilhar-twitter" target="_blank">@casadocodigo</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
+    </section>
+    
+<!-- scripts -->
+<include-html('../components/scripts.html')/>
+
 </body>
 </html>
