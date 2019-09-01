@@ -32,9 +32,9 @@
                         </ol>
                     </div>
                     <div class="col-md-6 col-4 align-self-center">
-                        <a href="/users/new" class="btn pull-right hidden-sm-down btn-success">Novo usuário</a>
+                        <a href="/user/new" class="btn pull-right hidden-sm-down btn-success">Novo usuário</a>
                     </div>
-                </div>            
+                </div>                
      
                 <!-- Page Content -->
                 <div class="row">                    
@@ -53,33 +53,15 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Fulano</td>
-                                                <td>Administrativo</td>
-                                                <td>data teste</td>
+                                            <tr for (user in data.users)>
+                                                <td>${user.name}</td>
+                                                <td>${user.accessGroup}</td>
+                                                <td>${user.createdAt}</td>
                                                 <td>
                                                     <a href="/users/edit" class="btn btn-warning"><i class="fa fa-edit"/></a>                                                
                                                     <a href="/users/delete" class="btn btn-danger"><i class="fa fa-trash"/></a>
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Ciclano</td>
-                                                <td>Analistas</td>                                                
-                                                <td>data teste</td>
-                                                <td>
-                                                    <a href="/users/edit" class="btn btn-warning"><i class="fa fa-edit"/></a>                                                
-                                                    <a href="/users/delete" class="btn btn-danger"><i class="fa fa-trash"/></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Beltrano</td>
-                                                <td>Administrativo</td>                                                
-                                                <td>data teste</td>
-                                                <td>
-                                                    <a href="/users/edit" class="btn btn-warning"><i class="fa fa-edit"/></a>                                                
-                                                    <a href="/users/delete" class="btn btn-danger"><i class="fa fa-trash"/></a>
-                                                </td>
-                                            </tr>
+                                            </tr>                                            
                                         </tbody>
                                     </table>
                                 </div>

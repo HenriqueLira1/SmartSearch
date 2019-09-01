@@ -1,4 +1,6 @@
 const express = require('express');
+const { check } = require('express-validator/check');
+
 const LivroController = require('./controllers/livroController');
 const LoginController = require('./controllers/loginController');
 const UserController = require('./controllers/UserController');
@@ -11,13 +13,22 @@ const routes = express.Router();
 
 routes.get('/', BaseController.index);
 
-routes.get('/reports', ReportController.index);
+routes.get('/report', ReportController.index);
 
 routes.get('/search', SearchController.index);
 
-routes.get('/users', UserController.index);
-routes.get('/users/new', UserController.create);
-routes.get('/users/edit', UserController.edit);
+routes.get('/user', UserController.index);
+routes.get('/user/new', UserController.create);
+
+routes.post('/user', [        
+    check('email').isEmail().withMessage('Email inválido!'),
+    check('password').isLength({ min: 10 }).withMessage('A senha precisa ter no minimo 10 caracteres!')
+], UserController.store);
+
+routes.get('/user/:id', UserController.show);
+routes.get('/user/:id/edit', UserController.edit);
+routes.put('/user/:id', UserController.update);
+routes.delete('/user/:id', UserController.destroy);
 
 routes.get('/login', (req, resp) => {
     resp.marko(

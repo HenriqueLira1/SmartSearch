@@ -28,9 +28,15 @@
                         <h3 class="text-themecolor m-b-0 m-t-0">Usuário</h3>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/">Home</a></li>
-                            <li class="breadcrumb-item"><a href="/users">Controle de acesso</a></li>
+                            <li class="breadcrumb-item"><a href="/user">Controle de acesso</a></li>
                             <li class="breadcrumb-item active">Usuário</li>
                         </ol>
+                    </div>
+                </div>
+
+                <div if(data.errors)>
+                    <div class="alert alert-danger" for(error in data.errors)>
+                        ${error.msg}
                     </div>
                 </div>
      
@@ -39,30 +45,30 @@
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-block">
-                                <form class="form-horizontal form-material">
+                                <form class="form-horizontal form-material" action="/user" method="POST">
                                     <div class="form-group">
                                         <label class="col-md-12">Nome</label>
                                         <div class="col-md-12">
-                                            <input type="text" class="form-control form-control-line" name="name">
+                                            <input type="text" value="${data.user.name}" class="form-control form-control-line" name="name">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-12">Email</label>
                                         <div class="col-md-12">
-                                            <input type="email" class="form-control form-control-line" name="email">
+                                            <input type="email" value="${data.user.email}" class="form-control form-control-line" name="email">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-12">Senha</label>
                                         <div class="col-md-12">
-                                            <input type="password" class="form-control form-control-line" name="password">
+                                            <input type="password" value="${data.user.password}" class="form-control form-control-line" name="password">
                                         </div>
-                                    </div>                                   
+                                    </div>
                                     <div class="form-group">
                                         <label class="col-sm-12">Grupo de acesso</label>
                                         <div class="col-sm-12">
                                             <select class="form-control form-control-line" name="access_group">
-                                                <option value=""></option>
+                                                <option value=""></option>                                                 
                                                 <option value="1">Administrativo</option>
                                                 <option value="2">Analista</option>
                                                 <option value="3">Auditor</option>

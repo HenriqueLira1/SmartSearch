@@ -13,7 +13,7 @@ const UserSchema = new Schema({
         type: String,
         required: true,        
     },
-    groupAccess: {
+    accessGroup: {
         type: Number,
         required: true,
     },
@@ -21,17 +21,5 @@ const UserSchema = new Schema({
     timestamps: true,
 });
 
-class User {
-    static validate() {
-        return [
-            check('titulo').isLength({ min: 5 }).withMessage('Título deve ter no minimo 5 caracteres!'),
-            check('preco').isCurrency().withMessage('O preço precisa ter um valor monetário válido!'),
-        ]
-    }
-}
-
-module.exports ={
-    model: model('User', UserSchema),
-    class: User
-}
+module.exports = model('User', UserSchema);
     
