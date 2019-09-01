@@ -2,45 +2,22 @@ const express = require('express');
 const LivroController = require('./controllers/livroController');
 const LoginController = require('./controllers/loginController');
 const UserController = require('./controllers/UserController');
+const ReportController = require('./controllers/ReportController');
+const SearchController = require('./controllers/SearchController');
+const BaseController = require('./controllers/BaseController');
 const Livro = require('./models/livro');
 
 const routes = express.Router();
 
-routes.get('/', (req, resp) => {
-    resp.marko(
-        require('./views/home/home.marko')
-    );
-});
+routes.get('/', BaseController.index);
 
-routes.get('/users', (req, resp) => {
-    resp.marko(
-        require('./views/users/users.marko')
-    );
-});
+routes.get('/reports', ReportController.index);
 
-routes.get('/users/new', (req, resp) => {
-    resp.marko(
-        require('./views/users/form/user_form.marko')
-    );
-});
+routes.get('/search', SearchController.index);
 
-routes.get('/users/edit', (req, resp) => {
-    resp.marko(
-        require('./views/users/form/user_form.marko')
-    );
-});
-
-routes.get('/reports', (req, resp) => {
-    resp.marko(
-        require('./views/reports/reports.marko')
-    );
-});
-
-routes.get('/search', (req, resp) => {
-    resp.marko(
-        require('./views/search/search.marko')
-    );
-});
+routes.get('/users', UserController.index);
+routes.get('/users/new', UserController.create);
+routes.get('/users/edit', UserController.edit);
 
 routes.get('/login', (req, resp) => {
     resp.marko(
