@@ -40,17 +40,45 @@ function render(input, out, __component, component, state) {
     out.w("</div>");
   }
 
-  out.w("<div class=\"row\"> <div class=\"col-sm-12\"><div class=\"card\"><div class=\"card-block\"><form class=\"form-horizontal form-material\" action=\"/user\" method=\"POST\"><div class=\"form-group\"><label class=\"col-md-12\">Nome</label><div class=\"col-md-12\"><input type=\"text\" value=\"" +
+  out.w("<div class=\"row\"> <div class=\"col-sm-12\"><div class=\"card\"><div class=\"card-block\"><form class=\"form-horizontal form-material\" action=\"/user\" method=\"POST\">");
+
+  if (data.user.id) {
+    out.w("<input type=\"hidden\" name=\"_method\" value=\"PUT\"><input type=\"hidden\" name=\"id\" value=\"" +
+      marko_escapeXmlAttr(data.user.id) +
+      "\">");
+  }
+
+  out.w("<div class=\"form-group\"><label class=\"col-md-12\">Nome</label><div class=\"col-md-12\"><input type=\"text\" value=\"" +
     marko_escapeXmlAttr(data.user.name) +
     "\" class=\"form-control form-control-line\" name=\"name\"></div></div><div class=\"form-group\"><label class=\"col-md-12\">Email</label><div class=\"col-md-12\"><input type=\"email\" value=\"" +
     marko_escapeXmlAttr(data.user.email) +
     "\" class=\"form-control form-control-line\" name=\"email\"></div></div><div class=\"form-group\"><label class=\"col-md-12\">Senha</label><div class=\"col-md-12\"><input type=\"password\" value=\"" +
     marko_escapeXmlAttr(data.user.password) +
-    "\" class=\"form-control form-control-line\" name=\"password\"></div></div><div class=\"form-group\"><label class=\"col-sm-12\">Grupo de acesso</label><div class=\"col-sm-12\"><select class=\"form-control form-control-line\" name=\"access_group\"><option value=\"\"></option> <option value=\"1\">Administrativo</option><option value=\"2\">Analista</option><option value=\"3\">Auditor</option></select></div></div><div class=\"form-group\"><div class=\"col-sm-12\"><button class=\"btn btn-success\">Salvar</button></div></div></form></div></div></div> </div> </div> <footer class=\"footer text-center\">\n    © 2019 SmartSearch\n</footer></div></div><script src=\"/estatico/plugins/jquery/jquery.min.js\"></script>\n<!-- Bootstrap tether Core JavaScript -->\n<script src=\"/estatico/plugins/bootstrap/js/tether.min.js\"></script>\n<script src=\"/estatico/plugins/bootstrap/js/bootstrap.min.js\"></script>\n<!-- slimscrollbar scrollbar JavaScript -->\n<script src=\"/estatico/template/js/jquery.slimscroll.js\"></script>\n<!--Wave Effects -->\n<script src=\"/estatico/template/js/waves.js\"></script>\n<!--Menu sidebar -->\n<script src=\"/estatico/template/js/sidebarmenu.js\"></script>\n<!--stickey kit -->\n<script src=\"/estatico/plugins/sticky-kit-master/dist/sticky-kit.min.js\"></script>\n<!--Custom JavaScript -->\n<script src=\"/estatico/template/js/custom.min.js\"></script>\n<!-- Flot Charts JavaScript -->\n<script src=\"/estatico/plugins/flot/jquery.flot.js\"></script>\n<script src=\"/estatico/plugins/flot.tooltip/js/jquery.flot.tooltip.min.js\"></script>\n<script src=\"/estatico/template/js/flot-data.js\"></script>\n<!-- Style switcher -->\n<script src=\"/estatico/plugins/styleswitcher/jQuery.style.switcher.js\"></script>");
+    "\" class=\"form-control form-control-line\" name=\"password\"></div></div><div class=\"form-group\"><label class=\"col-sm-12\">Grupo de acesso</label><div class=\"col-sm-12\"><select class=\"form-control form-control-line\" name=\"access_group\"><option value=\"\"></option>");
+
+  if (data.user.accessGroup == 1) {
+    out.w("<option value=\"1\" selected>Administrativo</option>");
+  } else {
+    out.w("<option value=\"1\">Administrativo</option>");
+  }
+
+  if (data.user.accessGroup == 2) {
+    out.w("<option value=\"2\" selected>Analista</option> ");
+  } else {
+    out.w("<option value=\"2\">Analista</option> ");
+  }
+
+  if (data.user.accessGroup == 3) {
+    out.w(" <option value=\"3\" selected>Auditor</option>");
+  } else {
+    out.w("<option value=\"3\">Auditor</option>");
+  }
+
+  out.w("</select></div></div><div class=\"form-group\"><div class=\"col-sm-12\"><button class=\"btn btn-success\">Salvar</button></div></div></form></div></div></div> </div> </div> <footer class=\"footer text-center\">\n    © 2019 SmartSearch\n</footer></div></div><script src=\"/estatico/plugins/jquery/jquery.min.js\"></script>\n<!-- Bootstrap tether Core JavaScript -->\n<script src=\"/estatico/plugins/bootstrap/js/tether.min.js\"></script>\n<script src=\"/estatico/plugins/bootstrap/js/bootstrap.min.js\"></script>\n<!-- slimscrollbar scrollbar JavaScript -->\n<script src=\"/estatico/template/js/jquery.slimscroll.js\"></script>\n<!--Wave Effects -->\n<script src=\"/estatico/template/js/waves.js\"></script>\n<!--Menu sidebar -->\n<script src=\"/estatico/template/js/sidebarmenu.js\"></script>\n<!--stickey kit -->\n<script src=\"/estatico/plugins/sticky-kit-master/dist/sticky-kit.min.js\"></script>\n<!--Custom JavaScript -->\n<script src=\"/estatico/template/js/custom.min.js\"></script>\n<!-- Flot Charts JavaScript -->\n<script src=\"/estatico/plugins/flot/jquery.flot.js\"></script>\n<script src=\"/estatico/plugins/flot.tooltip/js/jquery.flot.tooltip.min.js\"></script>\n<script src=\"/estatico/template/js/flot-data.js\"></script>\n<!-- Style switcher -->\n<script src=\"/estatico/plugins/styleswitcher/jQuery.style.switcher.js\"></script>");
 
   init_components_tag({}, out);
 
-  await_reorderer_tag({}, out, __component, "49");
+  await_reorderer_tag({}, out, __component, "54");
 
   out.w("</body></html>");
 }

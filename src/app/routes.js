@@ -7,6 +7,7 @@ const UserController = require('./controllers/UserController');
 const ReportController = require('./controllers/ReportController');
 const SearchController = require('./controllers/SearchController');
 const BaseController = require('./controllers/BaseController');
+const Rules = require('./models/Rules');
 const Livro = require('./models/livro');
 
 const routes = express.Router();
@@ -19,16 +20,12 @@ routes.get('/search', SearchController.index);
 
 routes.get('/user', UserController.index);
 routes.get('/user/new', UserController.create);
-
-routes.post('/user', [        
-    check('email').isEmail().withMessage('Email inválido!'),
-    check('password').isLength({ min: 10 }).withMessage('A senha precisa ter no minimo 10 caracteres!')
-], UserController.store);
-
+routes.post('/user', Rules.validateUser(), UserController.store);
 routes.get('/user/:id', UserController.show);
 routes.get('/user/:id/edit', UserController.edit);
-routes.put('/user/:id', UserController.update);
+routes.put('/user', Rules.validateUser(), UserController.update);
 routes.delete('/user/:id', UserController.destroy);
+
 
 routes.get('/login', (req, resp) => {
     resp.marko(

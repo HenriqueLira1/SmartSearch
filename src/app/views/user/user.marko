@@ -53,15 +53,20 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr for (user in data.users)>
-                                                <td>${user.name}</td>
-                                                <td>${user.accessGroup}</td>
-                                                <td>${user.createdAt}</td>
-                                                <td>
-                                                    <a href="/users/edit" class="btn btn-warning"><i class="fa fa-edit"/></a>                                                
-                                                    <a href="/users/delete" class="btn btn-danger"><i class="fa fa-trash"/></a>
-                                                </td>
-                                            </tr>                                            
+                                            <for (user in data.users)>
+                                                <tr>
+                                                    <td>${user.name}</td>
+                                                    <td>${user.accessGroup}</td>
+                                                    <td>${user.createdAt}</td>
+                                                    <td>
+                                                        <form action="/user/${user.id}" method="POST">
+                                                            <a href="/user/${user.id}/edit" class="btn btn-warning"><i class="fa fa-edit"/></a>
+                                                            <input type="hidden" name="_method" value="DELETE">
+                                                            <button type="submit" class="btn btn-danger" ><i class="fa fa-trash"/></button>                                                        
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            </for>
                                         </tbody>
                                     </table>
                                 </div>

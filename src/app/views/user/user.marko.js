@@ -11,6 +11,7 @@ var marko_template = module.exports = require("marko/src/html").t(__filename),
     component_globals_tag = marko_loadTag(require("marko/src/components/taglib/component-globals-tag")),
     marko_forEach = marko_helpers.f,
     marko_escapeXml = marko_helpers.x,
+    marko_escapeXmlAttr = marko_helpers.xa,
     init_components_tag = marko_loadTag(require("marko/src/components/taglib/init-components-tag")),
     await_reorderer_tag = marko_loadTag(require("marko/src/taglibs/async/await-reorderer-tag"));
 
@@ -34,14 +35,18 @@ function render(input, out, __component, component, state) {
       marko_escapeXml(user.accessGroup) +
       "</td><td>" +
       marko_escapeXml(user.createdAt) +
-      "</td><td><a href=\"/users/edit\" class=\"btn btn-warning\"><i class=\"fa fa-edit\"></i></a> <a href=\"/users/delete\" class=\"btn btn-danger\"><i class=\"fa fa-trash\"></i></a></td></tr>");
+      "</td><td><form action=\"/user/" +
+      marko_escapeXmlAttr(user.id) +
+      "\" method=\"POST\"><a href=\"/user/" +
+      marko_escapeXmlAttr(user.id) +
+      "/edit\" class=\"btn btn-warning\"><i class=\"fa fa-edit\"></i></a><input type=\"hidden\" name=\"_method\" value=\"DELETE\"><button type=\"submit\" class=\"btn btn-danger\"><i class=\"fa fa-trash\"></i></button> </form></td></tr>");
   });
 
-  out.w(" </tbody></table></div></div></div></div></div></div> <footer class=\"footer text-center\">\n    © 2019 SmartSearch\n</footer></div></div><script src=\"/estatico/plugins/jquery/jquery.min.js\"></script>\n<!-- Bootstrap tether Core JavaScript -->\n<script src=\"/estatico/plugins/bootstrap/js/tether.min.js\"></script>\n<script src=\"/estatico/plugins/bootstrap/js/bootstrap.min.js\"></script>\n<!-- slimscrollbar scrollbar JavaScript -->\n<script src=\"/estatico/template/js/jquery.slimscroll.js\"></script>\n<!--Wave Effects -->\n<script src=\"/estatico/template/js/waves.js\"></script>\n<!--Menu sidebar -->\n<script src=\"/estatico/template/js/sidebarmenu.js\"></script>\n<!--stickey kit -->\n<script src=\"/estatico/plugins/sticky-kit-master/dist/sticky-kit.min.js\"></script>\n<!--Custom JavaScript -->\n<script src=\"/estatico/template/js/custom.min.js\"></script>\n<!-- Flot Charts JavaScript -->\n<script src=\"/estatico/plugins/flot/jquery.flot.js\"></script>\n<script src=\"/estatico/plugins/flot.tooltip/js/jquery.flot.tooltip.min.js\"></script>\n<script src=\"/estatico/template/js/flot-data.js\"></script>\n<!-- Style switcher -->\n<script src=\"/estatico/plugins/styleswitcher/jQuery.style.switcher.js\"></script>");
+  out.w("</tbody></table></div></div></div></div></div></div> <footer class=\"footer text-center\">\n    © 2019 SmartSearch\n</footer></div></div><script src=\"/estatico/plugins/jquery/jquery.min.js\"></script>\n<!-- Bootstrap tether Core JavaScript -->\n<script src=\"/estatico/plugins/bootstrap/js/tether.min.js\"></script>\n<script src=\"/estatico/plugins/bootstrap/js/bootstrap.min.js\"></script>\n<!-- slimscrollbar scrollbar JavaScript -->\n<script src=\"/estatico/template/js/jquery.slimscroll.js\"></script>\n<!--Wave Effects -->\n<script src=\"/estatico/template/js/waves.js\"></script>\n<!--Menu sidebar -->\n<script src=\"/estatico/template/js/sidebarmenu.js\"></script>\n<!--stickey kit -->\n<script src=\"/estatico/plugins/sticky-kit-master/dist/sticky-kit.min.js\"></script>\n<!--Custom JavaScript -->\n<script src=\"/estatico/template/js/custom.min.js\"></script>\n<!-- Flot Charts JavaScript -->\n<script src=\"/estatico/plugins/flot/jquery.flot.js\"></script>\n<script src=\"/estatico/plugins/flot.tooltip/js/jquery.flot.tooltip.min.js\"></script>\n<script src=\"/estatico/template/js/flot-data.js\"></script>\n<!-- Style switcher -->\n<script src=\"/estatico/plugins/styleswitcher/jQuery.style.switcher.js\"></script>");
 
   init_components_tag({}, out);
 
-  await_reorderer_tag({}, out, __component, "42");
+  await_reorderer_tag({}, out, __component, "44");
 
   out.w("</body></html>");
 }
