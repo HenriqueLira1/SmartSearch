@@ -1,13 +1,13 @@
 {
-  "name": "casadocodigo",
+  "name": "smartsearch",
   "version": "1.0.0",
-  "description": "Livraria Casa do Codigo",
+  "description": "Smart Search",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js --ignore *.marko.js"
   },
-  "author": "Gabriel Leite",
+  "author": "Henrique Lira",
   "license": "ISC",
   "dependencies": {
     "body-parser": "1.18.3",

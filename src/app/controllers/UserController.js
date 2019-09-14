@@ -69,9 +69,7 @@ module.exports = {
             accessGroup
         });                
         
-        return res.marko(
-            require('../views/user/user.marko')
-        );
+        return res.redirect('/user');
     },
 
     show (req, res) {
