@@ -2,34 +2,29 @@ const uuid = require('uuid/v4');
 const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const User = require('../app/models/User');
 
-const UserDao = require('../app/dao/usuario-dao');
-const db = require('./database');
-
-module.exports = (app) => {
+module.exports = async (app) => {
     passport.use(new LocalStrategy({
         usernameField: 'email',
-        passwordField: 'senha',        
+        passwordField: 'password',        
     },
-    (email, password, done) => {
-        const userDao = new UserDao(db);
-        userDao.buscaPorEmail(email)
-            .then(user => {
-                if(!user || password != user.senha) {
-                    return done(null, false, {
-                        message: 'Login e senha incorretos!'
-                    })
-                } else {
-                    return done(null, user);
-                }
+    async (email, password, done) => {        
+        const user = await User.findOne({ email: email});        
+
+        if(!user || password != user.password) {                 
+            return done(null, false, {
+                message: 'Login e senha incorretos!'
             })
-            .catch(error => done(error, false));
+        } else {
+            return done(null, user);
+        }            
     }
     ));
 
     passport.serializeUser((user, done) => {
         const userSession = {
-            name: user.nome_completo,
+            name: user.name,
             email: user.email
         };
 
@@ -41,7 +36,7 @@ module.exports = (app) => {
     });
 
     app.use(session({
-        secret: 'Curso node',
+        secret: 'SmartSearch',
         genid: function (req) {
             return uuid();
         },

@@ -7,17 +7,16 @@ module.exports = {
     store (req, res, next) {
         const passport = req.passport;
         passport.authenticate('local', (error, user, info) => {
-            if (info) {
-                return res.marko('../views/login/login.marko');
+            if (info) {                
+                return res.redirect('/login');
             } else if (error) {
                 return next(error);
             } else {
-                req.login(user, erro => {
-                    if (erro) {
-                        return next(erro);                        
-                    } else {
-                        // console.log('ola');
-                        return res.redirect('/livros');
+                req.login(user, error => {
+                    if (error) {
+                        return next(error);                        
+                    } else {                    
+                        return res.redirect('/');
                     }
                 });
             }

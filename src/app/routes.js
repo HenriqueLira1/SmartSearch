@@ -1,18 +1,52 @@
 const express = require('express');
-const { check } = require('express-validator/check');
-
-const LivroController = require('./controllers/livroController');
-const LoginController = require('./controllers/loginController');
+const LoginController = require('./controllers/LoginController');
 const UserController = require('./controllers/UserController');
 const ReportController = require('./controllers/ReportController');
 const SearchController = require('./controllers/SearchController');
 const BaseController = require('./controllers/BaseController');
 const Rules = require('./models/Rules');
-const Livro = require('./models/livro');
 
 const routes = express.Router();
 
+routes.get('/', function(req, resp, next) {
+    if (req.isAuthenticated()) {
+        next();
+    } else {
+        resp.redirect('/login');
+    }
+});
+
+routes.get('/user*', function(req, resp, next) {
+    if (req.isAuthenticated()) {
+        next();
+    } else {
+        resp.redirect('/login');
+    }
+});
+
+
+routes.get('/report*', function(req, resp, next) {
+    if (req.isAuthenticated()) {
+        next();
+    } else {
+        resp.redirect('/login');
+    }
+});
+
+routes.get('/report*', function(req, resp, next) {
+    if (req.isAuthenticated()) {
+        next();
+    } else {
+        resp.redirect('/login');
+    }
+});
+
 routes.get('/', BaseController.index);
+
+
+routes.route('/login')
+    .get(LoginController.index)
+    .post(LoginController.store);
 
 routes.get('/report', ReportController.index);
 
@@ -25,27 +59,5 @@ routes.get('/user/:id', UserController.show);
 routes.get('/user/:id/edit', UserController.edit);
 routes.put('/user', Rules.validateUser(), UserController.update);
 routes.delete('/user/:id', UserController.destroy);
-
-
-routes.get('/login', (req, resp) => {
-    resp.marko(
-        require('./views/login-new/login.marko')
-    );
-});
-
-routes.get('/livros', LivroController.index);
-
-routes.route('/livros/form')
-    .get(LivroController.getNew)
-    .put(LivroController.edit)
-    .post(Livro.validate(), LivroController.store);
-
-// routes.route('/login')
-//     .get(LoginController.index)
-//     .post(LoginController.store);
-
-routes.delete('/livros/:id', LivroController.delete);
-
-routes.get('/livros/form/:id', LivroController.getEdit);
 
 module.exports = routes;
