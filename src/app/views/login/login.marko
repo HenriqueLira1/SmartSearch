@@ -1,18 +1,31 @@
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <!-- Tell the browser to be responsive to screen width -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- <link rel="icon" type="image/png" sizes="16x16" href="/estatico/images/favicon.png"> -->
-        <title>SmartSearch</title>
-        <!-- Bootstrap Core CSS -->
-        <link href="/estatico/template/css/login.css" rel="stylesheet">
-    </head>
+<html>    
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- Favicon icon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="/estatico/images/favicon.png">
+  <title>SmartSearch</title>
+  <!-- Bootstrap Core CSS -->
+  <link href="/estatico/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="/estatico/template/css/style.css" rel="stylesheet">
+  <link href="/estatico/template/css/login.css" rel="stylesheet">
+  <!-- You can change the theme colors from here -->
+  <link href="/estatico/template/css/colors/default-dark.css" id="theme" rel="stylesheet">
+</head> 
     <body>
-        <div class="login-page">
+        <div class="login-page">          
           <div class="form">
             <p>SmartSearch</p>
+            <div if(data.errors)>          
+              <div class="alert alert-danger">
+                  ${data.errors.message}
+              </div>
+            </div>
             <form class="login-form" method="POST" action="/login">
               <input type="text" placeholder="email" name="email"/>
               <input type="password" placeholder="senha" name="password" />

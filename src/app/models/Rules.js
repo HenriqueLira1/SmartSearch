@@ -4,7 +4,7 @@ class Rules {
     static validateUser() {
         return [
             check('email').isEmail().withMessage('Email inválido!'),
-            check('password').isLength({ min: 10 }).withMessage('A senha precisa ter no minimo 10 caracteres!'),
+            check('password').isLength({ min: 5 }).withMessage('A senha precisa ter no minimo 10 caracteres!'),
         ]
     }
 }

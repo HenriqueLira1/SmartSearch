@@ -7,8 +7,14 @@ module.exports = {
     store (req, res, next) {
         const passport = req.passport;
         passport.authenticate('local', (error, user, info) => {
-            if (info) {                
-                return res.redirect('/login');
+            if (info) {  
+                console.log(info);
+                return res.marko(
+                    require('../views/login/login.marko'), 
+                    {                        
+                        errors: info
+                    }
+                );
             } else if (error) {
                 return next(error);
             } else {
