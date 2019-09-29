@@ -1,0 +1,88 @@
+<html>
+<!-- Head -->
+<include-html('../../components/head.html')/>
+<body class="fix-header fix-sidebar card-no-border">
+    
+    <!-- Preloader - style you can find in spinners.css -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
+    </div>
+    
+    <!-- Main wrapper - style you can find in pages.scss -->    
+    <div id="main-wrapper">
+    
+        <!-- Topbar header - style you can find in pages.scss -->        
+        <include-html('../../components/header.html')/>
+
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->        
+        <include-html('../../components/sidebar.html')/>
+        
+        <div class="page-wrapper">
+            
+            <div class="container-fluid">
+                
+                <!-- Bread crumbs -->                
+                <div class="row page-titles">
+                    <div class="col-md-6 col-8 align-self-center">
+                        <h3 class="text-themecolor m-b-0 m-t-0">Relatórios</h3>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/report">Relatórios</a></li>
+                            <li class="breadcrumb-item active">${data.name}</li>
+                        </ol>
+                    </div>                    
+                </div>            
+     
+                <!-- Page Content -->
+                <div class="row">                    
+                    <div class="col-lg-4 col-xlg-3 col-md-5">
+                        <div class="card">
+                            <div class="card-block" style="text-align: center;">
+                                <img src="/estatico/images/users/default.svg" class="img-circle" width="150" />
+                                <h4 class="card-title m-t-10">${data.name}</h4>                                                      
+                            </div>
+                        </div>
+                    </div>
+                                
+                    <div class="col-lg-8 col-xlg-9 col-md-7">
+                        <for (source in data.reportData)>
+                            <div class="card">                            
+                                <div class="card-block">
+                                    <div class="form-horizontal form-material">                                        
+                                        <div class="form-group">
+                                            <h1 class="card-title m-t-10 col-md-12" style="text-align: center;">${source.name}</h1>
+                                            <for (sourceData in source.data)>
+                                                <if (typeof sourceData.value === 'object' && sourceData.value !== null)>
+                                                    <h2 class="card-title m-t-10 col-md-12">${sourceData.name}</h2>
+                                                    <for (sourceChildData in sourceData.value)>
+                                                        <h4 class="card-title m-t-10 col-md-6" style="margin-left: 35px;">${sourceChildData.name}</h4>
+                                                        <h6 class="card-subtitle col-md-6" style="margin-left: 35px;">${sourceChildData.value}</h6>
+                                                    </for>                                                                                                    
+                                                </if>                                            
+                                                <else>
+                                                    <h4 class="card-title m-t-10 col-md-12">${sourceData.name}</h4>
+                                                    <h6 class="card-subtitle col-md-12">${sourceData.value}</h6>
+                                                </else>                                                                                            
+                                            </for>                                                                                    
+                                        </div>           
+                                    </div>
+                                </div>                            
+                            </div>
+                        </for>
+                    </div>                                       
+                </div>
+                
+            </div>        
+                    
+            <!-- footer -->           
+            <include-html('../../components/footer.html')/>
+
+        </div>
+    </div>
+
+<!-- scripts -->
+<include-html('../../components/scripts.html')/>
+
+</body>
+</html>

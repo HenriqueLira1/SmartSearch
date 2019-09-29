@@ -20,10 +20,7 @@ module.exports = {
                     break;
             }
 
-            const createdAt = format(
-                'dd/MM/yyyy hh:mm',
-                new Date(user.createdAt)
-            );
+            const createdAt = format('dd/MM/yyyy hh:mm', new Date(user.createdAt));
 
             return {
                 name: user.name,
@@ -94,13 +91,7 @@ module.exports = {
             });
         }
 
-        const {
-            id,
-            name,
-            email,
-            password,
-            access_group: accessGroup
-        } = req.body;
+        const { id, name, email, password, access_group: accessGroup } = req.body;
 
         await User.updateOne(
             { _id: id },
