@@ -2,19 +2,6 @@ const axios = require('axios');
 
 module.exports = {
     async search(data) {
-        // const data = req.body;
-
-        // const response = await axios.postaxios.post('/localhost/fiap-ss/arpenp', {
-        //         cnpj: 'BarBaz',
-        //         name: 'FooBar'
-        //     })
-        //     .then(function (response) {
-        //         return response.data;
-        //     })
-        //     .catch(function (error) {
-        //         return error;
-        //     });
-
         return {
             cartorio_id: '110',
             busca_juiz_id: '1997333',

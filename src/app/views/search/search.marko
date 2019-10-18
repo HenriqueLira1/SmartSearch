@@ -31,42 +31,60 @@
                             <li class="breadcrumb-item active">Pesquisar</li>
                         </ol>
                     </div>                    
-                </div>            
+                </div>
+
+                <div if(data.errors)>
+                    <div class="alert alert-danger" for(error in data.errors)>
+                        ${error.msg}
+                    </div>
+                </div>
+
+                <div class="alert alert-warning" if(data.apiError)>
+                    ${data.apiError}
+                </div>
+
+                <div class="alert alert-danger" if(data.fatalApiError)>
+                    ${data.fatalApiError}
+                </div>
+                
+                <div class="alert alert-success" if(data.success)>
+                    ${data.success}
+                </div>
      
                 <!-- Page Content -->
                 <div class="row">                    
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-block">
-                                <form class="form-horizontal form-material">
+                                <form class="form-horizontal form-material" action="/search" method="POST">                                
                                     <div class="form-group">
                                         <label class="col-md-12">Nome</label>
                                         <div class="col-md-12">
-                                            <input type="text" name="name" class="form-control form-control-line">
+                                            <input type="text" value="${data.search.name}" name="name" class="form-control form-control-line">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-12">CPF</label>
                                         <div class="col-md-12">
-                                            <input type="text" class="form-control form-control-line" name="cpf" id="cpf">
+                                            <input type="text" value="${data.search.cpf}" class="form-control form-control-line" name="cpf" id="cpf">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-12">CNPJ</label>
                                         <div class="col-md-12">
-                                            <input type="text" class="form-control form-control-line" name="cpf" id="cpf">
+                                            <input type="text" value="${data.search.cnpj}" class="form-control form-control-line" name="cnpj" id="cnpj">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-12">Email</label>
                                         <div class="col-md-12">
-                                            <input type="email" class="form-control form-control-line" name="email" id="email">
+                                            <input type="email" value="${data.search.email}" class="form-control form-control-line" name="email" id="email">
                                         </div>
                                     </div>                                    
                                     <div class="form-group">
                                         <label class="col-md-12">Telefone</label>
                                         <div class="col-md-12">
-                                            <input type="text" class="form-control form-control-line">
+                                            <input type="tel" value="${data.search.phone}" name="phone" id="phone" class="form-control form-control-line">
                                         </div>
                                     </div>                                    
                                     <div class="form-group">

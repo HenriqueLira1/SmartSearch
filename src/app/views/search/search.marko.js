@@ -9,6 +9,9 @@ var marko_template = module.exports = require("marko/src/html").t(__filename),
     marko_helpers = require("marko/src/runtime/html/helpers"),
     marko_loadTag = marko_helpers.t,
     component_globals_tag = marko_loadTag(require("marko/src/components/taglib/component-globals-tag")),
+    marko_forEach = marko_helpers.f,
+    marko_escapeXml = marko_helpers.x,
+    marko_escapeXmlAttr = marko_helpers.xa,
     init_components_tag = marko_loadTag(require("marko/src/components/taglib/init-components-tag")),
     await_reorderer_tag = marko_loadTag(require("marko/src/taglibs/async/await-reorderer-tag"));
 
@@ -19,11 +22,57 @@ function render(input, out, __component, component, state) {
 
   component_globals_tag({}, out);
 
-  out.w("<div class=\"preloader\"><svg class=\"circular\" viewBox=\"25 25 50 50\"><circle class=\"path\" cx=\"50\" cy=\"50\" r=\"20\" fill=\"none\" stroke-width=\"2\" stroke-miterlimit=\"10\"></circle> </svg></div><div id=\"main-wrapper\"><header class=\"topbar\">\n    <nav class=\"navbar top-navbar navbar-toggleable-sm navbar-light\">        \n        <div class=\"navbar-header\">\n            <a class=\"navbar-brand\" href=\"/\" style=\"color: #272c33\">\n                <!-- Logo icon -->\n                <b>\n                    <i class=\"fa fa-search\"></i>                    \n                </b>                \n                <!-- Logo text -->\n                <span>\n                    SmartSearch\n                </span>\n            </a>\n        </div>\n\n        <div class=\"navbar-collapse\">\n            <ul class=\"navbar-nav mr-auto mt-md-0 \">\n            </ul>\n\n            <!-- User profile and search -->            \n            <ul class=\"navbar-nav my-lg-0\">\n                <li class=\"nav-item dropdown\">\n                    <a class=\"nav-link dropdown-toggle text-muted waves-effect waves-dark\" href=\"\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"><img src=\"/estatico/images/users/default.svg\" alt=\"user\" class=\"profile-pic m-r-5\" />User</a>\n                </li>\n            </ul>\n        </div>\n    </nav>\n</header><aside class=\"left-sidebar\">\n    <div class=\"scroll-sidebar\">\n        <nav class=\"sidebar-nav\">\n            <ul id=\"sidebarnav\">\n                <li>\n                    <a href=\"/search\" class=\"waves-effect\"><i class=\"fa fa-search m-r-10\" aria-hidden=\"true\"></i>Pesquisar</a>\n                </li>\n                <li>\n                    <a href=\"/report\" class=\"waves-effect\"><i class=\"fa fa-list m-r-10\" aria-hidden=\"true\"></i>Relatórios</a>\n                </li>\n                <li>\n                    <a href=\"/user\" class=\"waves-effect\"><i class=\"fa fa-vcard m-r-10\" aria-hidden=\"true\"></i>Controle de acesso</a>\n                </li>\n            </ul>\n        </nav>\n    </div>\n</aside><div class=\"page-wrapper\"> <div class=\"container-fluid\"><div class=\"row page-titles\"><div class=\"col-md-6 col-8 align-self-center\"><h3 class=\"text-themecolor m-b-0 m-t-0\">Pesquisar</h3><ol class=\"breadcrumb\"><li class=\"breadcrumb-item\"><a href=\"/\">Home</a></li><li class=\"breadcrumb-item active\">Pesquisar</li></ol></div> </div> <div class=\"row\"> <div class=\"col-sm-12\"><div class=\"card\"><div class=\"card-block\"><form class=\"form-horizontal form-material\"><div class=\"form-group\"><label class=\"col-md-12\">Nome</label><div class=\"col-md-12\"><input type=\"text\" name=\"name\" class=\"form-control form-control-line\"></div></div><div class=\"form-group\"><label class=\"col-md-12\">CPF</label><div class=\"col-md-12\"><input type=\"text\" class=\"form-control form-control-line\" name=\"cpf\" id=\"cpf\"></div></div><div class=\"form-group\"><label class=\"col-md-12\">CNPJ</label><div class=\"col-md-12\"><input type=\"text\" class=\"form-control form-control-line\" name=\"cpf\" id=\"cpf\"></div></div><div class=\"form-group\"><label class=\"col-md-12\">Email</label><div class=\"col-md-12\"><input type=\"email\" class=\"form-control form-control-line\" name=\"email\" id=\"email\"></div></div> <div class=\"form-group\"><label class=\"col-md-12\">Telefone</label><div class=\"col-md-12\"><input type=\"text\" class=\"form-control form-control-line\"></div></div> <div class=\"form-group\"><div class=\"col-sm-12\"><button class=\"btn btn-success\">Pesquisar</button></div></div></form></div></div></div> </div> </div> <footer class=\"footer text-center\">\n    © 2019 SmartSearch\n</footer></div></div><script src=\"/estatico/plugins/jquery/jquery.min.js\"></script>\n<!-- Bootstrap tether Core JavaScript -->\n<script src=\"/estatico/plugins/bootstrap/js/tether.min.js\"></script>\n<script src=\"/estatico/plugins/bootstrap/js/bootstrap.min.js\"></script>\n<!-- slimscrollbar scrollbar JavaScript -->\n<script src=\"/estatico/template/js/jquery.slimscroll.js\"></script>\n<!--Wave Effects -->\n<script src=\"/estatico/template/js/waves.js\"></script>\n<!--Menu sidebar -->\n<script src=\"/estatico/template/js/sidebarmenu.js\"></script>\n<!--stickey kit -->\n<script src=\"/estatico/plugins/sticky-kit-master/dist/sticky-kit.min.js\"></script>\n<!--Custom JavaScript -->\n<script src=\"/estatico/template/js/custom.min.js\"></script>\n<!-- Flot Charts JavaScript -->\n<script src=\"/estatico/plugins/flot/jquery.flot.js\"></script>\n<script src=\"/estatico/plugins/flot.tooltip/js/jquery.flot.tooltip.min.js\"></script>\n<script src=\"/estatico/template/js/flot-data.js\"></script>\n<!-- Style switcher -->\n<script src=\"/estatico/plugins/styleswitcher/jQuery.style.switcher.js\"></script>");
+  out.w("<div class=\"preloader\"><svg class=\"circular\" viewBox=\"25 25 50 50\"><circle class=\"path\" cx=\"50\" cy=\"50\" r=\"20\" fill=\"none\" stroke-width=\"2\" stroke-miterlimit=\"10\"></circle> </svg></div><div id=\"main-wrapper\"><header class=\"topbar\">\n    <nav class=\"navbar top-navbar navbar-toggleable-sm navbar-light\">        \n        <div class=\"navbar-header\">\n            <a class=\"navbar-brand\" href=\"/\" style=\"color: #272c33\">\n                <!-- Logo icon -->\n                <b>\n                    <i class=\"fa fa-search\"></i>                    \n                </b>                \n                <!-- Logo text -->\n                <span>\n                    SmartSearch\n                </span>\n            </a>\n        </div>\n\n        <div class=\"navbar-collapse\">\n            <ul class=\"navbar-nav mr-auto mt-md-0 \">\n            </ul>\n\n            <!-- User profile and search -->            \n            <ul class=\"navbar-nav my-lg-0\">\n                <li class=\"nav-item dropdown\">\n                    <a class=\"nav-link dropdown-toggle text-muted waves-effect waves-dark\" href=\"\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"><img src=\"/estatico/images/users/default.svg\" alt=\"user\" class=\"profile-pic m-r-5\" />User</a>\n                </li>\n            </ul>\n        </div>\n    </nav>\n</header><aside class=\"left-sidebar\">\n    <div class=\"scroll-sidebar\">\n        <nav class=\"sidebar-nav\">\n            <ul id=\"sidebarnav\">\n                <li>\n                    <a href=\"/search\" class=\"waves-effect\"><i class=\"fa fa-search m-r-10\" aria-hidden=\"true\"></i>Pesquisar</a>\n                </li>\n                <li>\n                    <a href=\"/report\" class=\"waves-effect\"><i class=\"fa fa-list m-r-10\" aria-hidden=\"true\"></i>Relatórios</a>\n                </li>\n                <li>\n                    <a href=\"/user\" class=\"waves-effect\"><i class=\"fa fa-vcard m-r-10\" aria-hidden=\"true\"></i>Controle de acesso</a>\n                </li>\n            </ul>\n        </nav>\n    </div>\n</aside><div class=\"page-wrapper\"> <div class=\"container-fluid\"><div class=\"row page-titles\"><div class=\"col-md-6 col-8 align-self-center\"><h3 class=\"text-themecolor m-b-0 m-t-0\">Pesquisar</h3><ol class=\"breadcrumb\"><li class=\"breadcrumb-item\"><a href=\"/\">Home</a></li><li class=\"breadcrumb-item active\">Pesquisar</li></ol></div> </div>");
+
+  if (data.errors) {
+    out.w("<div>");
+
+    var for__16 = 0;
+
+    marko_forEach(data.errors, function(error) {
+      var keyscope__17 = "[" + ((for__16++) + "]");
+
+      out.w("<div class=\"alert alert-danger\">" +
+        marko_escapeXml(error.msg) +
+        "</div>");
+    });
+
+    out.w("</div>");
+  }
+
+  if (data.apiError) {
+    out.w("<div class=\"alert alert-warning\">" +
+      marko_escapeXml(data.apiError) +
+      "</div>");
+  }
+
+  if (data.fatalApiError) {
+    out.w("<div class=\"alert alert-danger\">" +
+      marko_escapeXml(data.fatalApiError) +
+      "</div>");
+  }
+
+  if (data.success) {
+    out.w("<div class=\"alert alert-success\">" +
+      marko_escapeXml(data.success) +
+      "</div>");
+  }
+
+  out.w("<div class=\"row\"> <div class=\"col-sm-12\"><div class=\"card\"><div class=\"card-block\"><form class=\"form-horizontal form-material\" action=\"/search\" method=\"POST\"> <div class=\"form-group\"><label class=\"col-md-12\">Nome</label><div class=\"col-md-12\"><input type=\"text\" value=\"" +
+    marko_escapeXmlAttr(data.search.name) +
+    "\" name=\"name\" class=\"form-control form-control-line\"></div></div><div class=\"form-group\"><label class=\"col-md-12\">CPF</label><div class=\"col-md-12\"><input type=\"text\" value=\"" +
+    marko_escapeXmlAttr(data.search.cpf) +
+    "\" class=\"form-control form-control-line\" name=\"cpf\" id=\"cpf\"></div></div><div class=\"form-group\"><label class=\"col-md-12\">CNPJ</label><div class=\"col-md-12\"><input type=\"text\" value=\"" +
+    marko_escapeXmlAttr(data.search.cnpj) +
+    "\" class=\"form-control form-control-line\" name=\"cnpj\" id=\"cnpj\"></div></div><div class=\"form-group\"><label class=\"col-md-12\">Email</label><div class=\"col-md-12\"><input type=\"email\" value=\"" +
+    marko_escapeXmlAttr(data.search.email) +
+    "\" class=\"form-control form-control-line\" name=\"email\" id=\"email\"></div></div> <div class=\"form-group\"><label class=\"col-md-12\">Telefone</label><div class=\"col-md-12\"><input type=\"tel\" value=\"" +
+    marko_escapeXmlAttr(data.search.phone) +
+    "\" name=\"phone\" id=\"phone\" class=\"form-control form-control-line\"></div></div> <div class=\"form-group\"><div class=\"col-sm-12\"><button class=\"btn btn-success\">Pesquisar</button></div></div></form></div></div></div> </div> </div> <footer class=\"footer text-center\">\n    © 2019 SmartSearch\n</footer></div></div><script src=\"/estatico/plugins/jquery/jquery.min.js\"></script>\n<!-- Bootstrap tether Core JavaScript -->\n<script src=\"/estatico/plugins/bootstrap/js/tether.min.js\"></script>\n<script src=\"/estatico/plugins/bootstrap/js/bootstrap.min.js\"></script>\n<!-- slimscrollbar scrollbar JavaScript -->\n<script src=\"/estatico/template/js/jquery.slimscroll.js\"></script>\n<!--Wave Effects -->\n<script src=\"/estatico/template/js/waves.js\"></script>\n<!--Menu sidebar -->\n<script src=\"/estatico/template/js/sidebarmenu.js\"></script>\n<!--stickey kit -->\n<script src=\"/estatico/plugins/sticky-kit-master/dist/sticky-kit.min.js\"></script>\n<!--Custom JavaScript -->\n<script src=\"/estatico/template/js/custom.min.js\"></script>\n<!-- Flot Charts JavaScript -->\n<script src=\"/estatico/plugins/flot/jquery.flot.js\"></script>\n<script src=\"/estatico/plugins/flot.tooltip/js/jquery.flot.tooltip.min.js\"></script>\n<script src=\"/estatico/template/js/flot-data.js\"></script>\n<!-- Style switcher -->\n<script src=\"/estatico/plugins/styleswitcher/jQuery.style.switcher.js\"></script>");
 
   init_components_tag({}, out);
 
-  await_reorderer_tag({}, out, __component, "43");
+  await_reorderer_tag({}, out, __component, "50");
 
   out.w("</body></html>");
 }

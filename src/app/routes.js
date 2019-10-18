@@ -51,6 +51,7 @@ routes.get('/report', ReportController.index);
 routes.get('/report/:id', ReportController.show);
 
 routes.get('/search', SearchController.index);
+routes.post('/search', Rules.validateSeach(), SearchController.store);
 
 routes.get('/user', UserController.index);
 routes.get('/user/new', UserController.create);
