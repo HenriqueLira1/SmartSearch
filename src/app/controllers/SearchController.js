@@ -21,8 +21,8 @@ module.exports = {
 
         const report = await Report.create({ name, cpf });
 
-        // const apisService = new ApisService();
-        // apisService.callApis(req.body, report._id);
+        const apisService = new ApisService();
+        apisService.callApis(req.body, report._id);
 
         response = res.marko(require('../views/search/search.marko'), {
             search: req.body,

@@ -1,73 +1,87 @@
-const Arpenp = require('../service/ArpenpService');
-const Cadesp = require('../service/CadespService');
-const Caged = require('../service/CagedService');
+const Report = require('../models/Report');
+const format = require('date-format');
 
 module.exports = {
-    index(req, res) {
-        return res.marko(require('../views/reports/reports.marko'));
+    async index(req, res) {
+        const reports = await Report.find();
+
+        const formatedReports = reports.map(report => {
+            const createdAt = format('dd/MM/yyyy hh:mm', new Date(report.createdAt));
+
+            return {
+                name: report.name,
+                cpf: report.cpf,
+                createdAt,
+                id: report.id
+            };
+        });
+
+        return res.marko(require('../views/reports/reports.marko'), { reports: formatedReports });
     },
     async show(req, res) {
-        const arenspData = await Arpenp.search({});
-
-        const cadespData = await Cadesp.search({});
-
-        const cagedData = await Caged.search({});
-
-        const data = {
-            arpenp: arenspData,
-            cadesp: cadespData,
-            caged: cagedData
-        };
+        const reportId = req.params.id;
+        const report = await Report.findById(reportId);
 
         const formatedData = [];
 
-        for (const sourceName in data) {
-            const dataSource = {};
+        const validProperties = ['arisp', 'arpenp', 'cadesp', 'caged', 'censec', 'detran', 'infocrim', 'jucesp', 'siel', 'sivec'];
 
-            dataSource.name = sourceName.charAt(0).toUpperCase() + sourceName.slice(1);
-            dataSource.data = [];
+        for (const sourceName in report) {
+            const isPropertyValid = validProperties.indexOf(sourceName) !== -1 && report[sourceName];
 
-            const childData = data[sourceName];
+            if (isPropertyValid) {
+                const childData = JSON.parse(report[sourceName]);
+                const dataSource = {};
 
-            for (const childDataName in childData) {
-                let childDataValue = childData[childDataName];
-                let childDataObject = {};
+                dataSource.name = sourceName.charAt(0).toUpperCase() + sourceName.slice(1);
+                dataSource.data = [];
 
-                if (typeof childDataValue === 'object' && childDataValue !== null) {
-                    let childDataValueObjects = [];
-                    for (const grandChildName in childDataValue) {
-                        childDataValue[grandChildName] = childDataValue[grandChildName].toLowerCase().replace(/_/g, ' ');
-                        childDataValue[grandChildName] =
-                            childDataValue[grandChildName].charAt(0).toUpperCase() + childDataValue[grandChildName].slice(1);
+                for (const childDataName in childData) {
+                    let childDataValue = childData[childDataName];
 
-                        const grandChildObject = {
-                            name: grandChildName.charAt(0).toUpperCase() + grandChildName.slice(1).replace(/_/g, ' '),
-                            value: childDataValue[grandChildName]
+                    let childDataObject = {};
+
+                    if (typeof childDataValue === 'object' && childDataValue !== null) {
+                        let childDataValueObjects = [];
+
+                        for (const grandChildName in childDataValue) {
+                            let grandChildValue = childDataValue[grandChildName];
+
+                            if (typeof grandChildValue !== 'object') {
+                                grandChildValue = grandChildValue.toLowerCase().replace(/_/g, ' ');
+                                grandChildValue = grandChildValue.charAt(0).toUpperCase() + grandChildValue.slice(1);
+
+                                const grandChildObject = {
+                                    name: grandChildName.charAt(0).toUpperCase() + grandChildName.slice(1).replace(/_/g, ' '),
+                                    value: grandChildValue
+                                };
+                                childDataValueObjects.push(grandChildObject);
+                            }
+                        }
+
+                        childDataObject = {
+                            name: childDataName.charAt(0).toUpperCase() + childDataName.slice(1).replace(/_/g, ' '),
+                            value: childDataValueObjects
                         };
-                        childDataValueObjects.push(grandChildObject);
+                    } else {
+                        childDataValue = childDataValue.toLowerCase().replace(/_/g, ' ');
+                        childDataValue = childDataValue.charAt(0).toUpperCase() + childDataValue.slice(1);
+
+                        childDataObject = {
+                            name: childDataName.charAt(0).toUpperCase() + childDataName.slice(1).replace(/_/g, ' '),
+                            value: childDataValue
+                        };
                     }
 
-                    childDataObject = {
-                        name: childDataName.charAt(0).toUpperCase() + childDataName.slice(1).replace(/_/g, ' '),
-                        value: childDataValueObjects
-                    };
-                } else {
-                    childDataValue = childDataValue.toLowerCase().replace(/_/g, ' ');
-                    childDataValue = childDataValue.charAt(0).toUpperCase() + childDataValue.slice(1);
-
-                    childDataObject = {
-                        name: childDataName.charAt(0).toUpperCase() + childDataName.slice(1).replace(/_/g, ' '),
-                        value: childDataValue
-                    };
+                    dataSource.data.push(childDataObject);
                 }
-                dataSource.data.push(childDataObject);
-            }
 
-            formatedData.push(dataSource);
+                formatedData.push(dataSource);
+            }
         }
 
         return res.marko(require('../views/reports/detail/report_detail.marko'), {
-            name: 'Klaudio Taffarel',
+            name: report.name,
             reportData: formatedData
         });
     }

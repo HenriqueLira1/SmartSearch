@@ -50,15 +50,16 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>KLAUDIO TAFFAREL</td>
-                                                <td>360.123.198-74</td>
-                                                <td>28/09/2019</td>
-                                                <td>                                                    
-                                                    <a href="/report/1" class="btn btn-success"><i class="fa fa-download"/></a>
-                                                    <a href="/report/1" class="btn btn-primary"><i class="fa fa-eye"/></a>
-                                                </td>
-                                            </tr>
+                                            <for (report in data.reports)>
+                                                <tr>
+                                                    <td>${report.name}</td>
+                                                    <td>${report.cpf}</td>
+                                                    <td>${report.createdAt}</td>
+                                                    <td>                                                                                                            
+                                                        <a href=`/report/${report.id}` class="btn btn-primary"><i class="fa fa-eye"/></a>
+                                                    </td>
+                                                </tr>
+                                            </for>
                                         </tbody>
                                     </table>
                                 </div>

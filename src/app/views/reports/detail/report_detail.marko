@@ -46,13 +46,13 @@
                     </div>
                                 
                     <div class="col-lg-8 col-xlg-9 col-md-7">
-                        <for (source in data.reportData)>
+                        <for (source in data.reportData)>                        
                             <div class="card">                            
                                 <div class="card-block">
                                     <div class="form-horizontal form-material">                                        
                                         <div class="form-group">
                                             <h1 class="card-title m-t-10 col-md-12" style="text-align: center;">${source.name}</h1>
-                                            <for (sourceData in source.data)>
+                                            <for (sourceData in source.data)>                                            
                                                 <if (typeof sourceData.value === 'object' && sourceData.value !== null)>
                                                     <h2 class="card-title m-t-10 col-md-12">${sourceData.name}</h2>
                                                     <for (sourceChildData in sourceData.value)>

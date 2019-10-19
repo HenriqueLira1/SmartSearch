@@ -32,7 +32,7 @@ function render(input, out, __component, component, state) {
   marko_forEach(data.reportData, function(source) {
     var keyscope__25 = "[" + ((for__24++) + "]");
 
-    out.w("<div class=\"card\"> <div class=\"card-block\"><div class=\"form-horizontal form-material\"> <div class=\"form-group\"><h1 class=\"card-title m-t-10 col-md-12\" style=\"text-align: center;\">" +
+    out.w(" <div class=\"card\"> <div class=\"card-block\"><div class=\"form-horizontal form-material\"> <div class=\"form-group\"><h1 class=\"card-title m-t-10 col-md-12\" style=\"text-align: center;\">" +
       marko_escapeXml(source.name) +
       "</h1>");
 
@@ -40,6 +40,8 @@ function render(input, out, __component, component, state) {
 
     marko_forEach(source.data, function(sourceData) {
       var keyscope__32 = "[" + (((for__31++) + keyscope__25) + "]");
+
+      out.w(" ");
 
       if (((typeof sourceData.value) === "object") && (sourceData.value !== null)) {
         out.w("<h2 class=\"card-title m-t-10 col-md-12\">" +
