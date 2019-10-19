@@ -1,12 +1,13 @@
 const Report = require('../models/Report');
-const format = require('date-format');
+const formatDate = require('date-format');
+const Formatters = require('../helpers/Formatters');
 
 module.exports = {
     async index(req, res) {
         const reports = await Report.find();
 
         const formatedReports = reports.map(report => {
-            const createdAt = format('dd/MM/yyyy hh:mm', new Date(report.createdAt));
+            const createdAt = formatDate('dd/MM/yyyy hh:mm', new Date(report.createdAt));
 
             return {
                 name: report.name,
@@ -33,47 +34,64 @@ module.exports = {
                 const childData = JSON.parse(report[sourceName]);
                 const dataSource = {};
 
-                dataSource.name = sourceName.charAt(0).toUpperCase() + sourceName.slice(1);
+                dataSource.name = Formatters.formatName(sourceName);
                 dataSource.data = [];
 
-                for (const childDataName in childData) {
-                    let childDataValue = childData[childDataName];
+                for (const childName in childData) {
+                    let childValue = childData[childName];
 
-                    let childDataObject = {};
+                    let childObject = {};
 
-                    if (typeof childDataValue === 'object' && childDataValue !== null) {
-                        let childDataValueObjects = [];
+                    if (typeof childValue === 'object' && childValue !== null) {
+                        let childValueObjects = [];
 
-                        for (const grandChildName in childDataValue) {
-                            let grandChildValue = childDataValue[grandChildName];
+                        for (const grandChildName in childValue) {
+                            let grandChildValue = childValue[grandChildName];
 
-                            if (typeof grandChildValue !== 'object') {
-                                grandChildValue = grandChildValue.toLowerCase().replace(/_/g, ' ');
-                                grandChildValue = grandChildValue.charAt(0).toUpperCase() + grandChildValue.slice(1);
+                            if (typeof grandChildValue === 'object' && grandChildValue !== null) {
+                                let grandChildValueObjects = [];
+
+                                for (const greatGrandChildName in grandChildValue) {
+                                    let greatGrandChildValue = grandChildValue[greatGrandChildName];
+
+                                    if (typeof greatGrandChildValue !== 'object') {
+                                        const greatGrandChildObject = {
+                                            name: Formatters.formatName(greatGrandChildName),
+                                            value: Formatters.formatValue(greatGrandChildValue)
+                                        };
+
+                                        grandChildValueObjects.push(greatGrandChildObject);
+                                    }
+                                }
 
                                 const grandChildObject = {
-                                    name: grandChildName.charAt(0).toUpperCase() + grandChildName.slice(1).replace(/_/g, ' '),
-                                    value: grandChildValue
+                                    name: Formatters.formatName(grandChildName),
+                                    value: grandChildValueObjects
                                 };
-                                childDataValueObjects.push(grandChildObject);
+
+                                childValueObjects.push(grandChildObject);
+                            } else {
+                                const grandChildObject = {
+                                    name: Formatters.formatName(grandChildName),
+                                    value: Formatters.formatValue(grandChildValue)
+                                };
+
+                                childValueObjects.push(grandChildObject);
                             }
                         }
 
-                        childDataObject = {
-                            name: childDataName.charAt(0).toUpperCase() + childDataName.slice(1).replace(/_/g, ' '),
-                            value: childDataValueObjects
+                        childObject = {
+                            name: Formatters.formatName(childName),
+                            value: childValueObjects
                         };
                     } else {
-                        childDataValue = childDataValue.toLowerCase().replace(/_/g, ' ');
-                        childDataValue = childDataValue.charAt(0).toUpperCase() + childDataValue.slice(1);
-
-                        childDataObject = {
-                            name: childDataName.charAt(0).toUpperCase() + childDataName.slice(1).replace(/_/g, ' '),
-                            value: childDataValue
+                        childObject = {
+                            name: Formatters.formatName(childName),
+                            value: Formatters.formatValue(childValue)
                         };
                     }
 
-                    dataSource.data.push(childDataObject);
+                    dataSource.data.push(childObject);
                 }
 
                 formatedData.push(dataSource);

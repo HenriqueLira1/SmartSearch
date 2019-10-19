@@ -56,8 +56,17 @@
                                                 <if (typeof sourceData.value === 'object' && sourceData.value !== null)>
                                                     <h2 class="card-title m-t-10 col-md-12">${sourceData.name}</h2>
                                                     <for (sourceChildData in sourceData.value)>
-                                                        <h4 class="card-title m-t-10 col-md-6" style="margin-left: 35px;">${sourceChildData.name}</h4>
-                                                        <h6 class="card-subtitle col-md-6" style="margin-left: 35px;">${sourceChildData.value}</h6>
+                                                        <if (typeof sourceChildData.value === 'object' && sourceChildData.value !== null)>
+                                                            <h2 class="card-title m-t-10 col-md-12">${sourceChildData.name}</h2>
+                                                            <for (sourceGrandChildData in sourceChildData.value)>
+                                                                <h4 class="card-title m-t-10 col-md-6" style="margin-left: 35px;">${sourceGrandChildData.name}</h4>
+                                                                <h6 class="card-subtitle col-md-6" style="margin-left: 35px;">${sourceGrandChildData.value}</h6>
+                                                            </for>
+                                                        </if>
+                                                        <else>
+                                                            <h4 class="card-title m-t-10 col-md-6" style="margin-left: 35px;">${sourceChildData.name}</h4>
+                                                            <h6 class="card-subtitle col-md-6" style="margin-left: 35px;">${sourceChildData.value}</h6>
+                                                        </else>
                                                     </for>                                                                                                    
                                                 </if>                                            
                                                 <else>

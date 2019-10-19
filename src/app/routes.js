@@ -4,7 +4,7 @@ const UserController = require('./controllers/UserController');
 const ReportController = require('./controllers/ReportController');
 const SearchController = require('./controllers/SearchController');
 const BaseController = require('./controllers/BaseController');
-const Rules = require('./models/Rules');
+const Rules = require('./helpers/Rules');
 
 const routes = express.Router();
 

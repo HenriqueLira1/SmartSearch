@@ -53,11 +53,29 @@ function render(input, out, __component, component, state) {
         marko_forEach(sourceData.value, function(sourceChildData) {
           var keyscope__35 = "[" + (((for__34++) + keyscope__32) + "]");
 
-          out.w("<h4 class=\"card-title m-t-10 col-md-6\" style=\"margin-left: 35px;\">" +
-            marko_escapeXml(sourceChildData.name) +
-            "</h4><h6 class=\"card-subtitle col-md-6\" style=\"margin-left: 35px;\">" +
-            marko_escapeXml(sourceChildData.value) +
-            "</h6>");
+          if (((typeof sourceChildData.value) === "object") && (sourceChildData.value !== null)) {
+            out.w("<h2 class=\"card-title m-t-10 col-md-12\">" +
+              marko_escapeXml(sourceChildData.name) +
+              "</h2>");
+
+            var for__37 = 0;
+
+            marko_forEach(sourceChildData.value, function(sourceGrandChildData) {
+              var keyscope__38 = "[" + (((for__37++) + keyscope__35) + "]");
+
+              out.w("<h4 class=\"card-title m-t-10 col-md-6\" style=\"margin-left: 35px;\">" +
+                marko_escapeXml(sourceGrandChildData.name) +
+                "</h4><h6 class=\"card-subtitle col-md-6\" style=\"margin-left: 35px;\">" +
+                marko_escapeXml(sourceGrandChildData.value) +
+                "</h6>");
+            });
+          } else {
+            out.w("<h4 class=\"card-title m-t-10 col-md-6\" style=\"margin-left: 35px;\">" +
+              marko_escapeXml(sourceChildData.name) +
+              "</h4><h6 class=\"card-subtitle col-md-6\" style=\"margin-left: 35px;\">" +
+              marko_escapeXml(sourceChildData.value) +
+              "</h6>");
+          }
         });
 
         out.w(" ");
@@ -79,7 +97,7 @@ function render(input, out, __component, component, state) {
 
   init_components_tag({}, out);
 
-  await_reorderer_tag({}, out, __component, "40");
+  await_reorderer_tag({}, out, __component, "45");
 
   out.w("</body></html>");
 }
