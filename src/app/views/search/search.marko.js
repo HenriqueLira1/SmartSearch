@@ -40,17 +40,7 @@ function render(input, out, __component, component, state) {
     out.w("</div>");
   }
 
-  if (data.apiError) {
-    out.w("<div class=\"alert alert-warning\">" +
-      marko_escapeXml(data.apiError) +
-      "</div>");
-  }
-
-  if (data.fatalApiError) {
-    out.w("<div class=\"alert alert-danger\">" +
-      marko_escapeXml(data.fatalApiError) +
-      "</div>");
-  }
+  out.w(" ");
 
   if (data.success) {
     out.w("<div class=\"alert alert-success\">" +
@@ -72,7 +62,7 @@ function render(input, out, __component, component, state) {
 
   init_components_tag({}, out);
 
-  await_reorderer_tag({}, out, __component, "50");
+  await_reorderer_tag({}, out, __component, "48");
 
   out.w("</body></html>");
 }

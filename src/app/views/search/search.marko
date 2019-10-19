@@ -37,15 +37,7 @@
                     <div class="alert alert-danger" for(error in data.errors)>
                         ${error.msg}
                     </div>
-                </div>
-
-                <div class="alert alert-warning" if(data.apiError)>
-                    ${data.apiError}
-                </div>
-
-                <div class="alert alert-danger" if(data.fatalApiError)>
-                    ${data.fatalApiError}
-                </div>
+                </div>                
                 
                 <div class="alert alert-success" if(data.success)>
                     ${data.success}

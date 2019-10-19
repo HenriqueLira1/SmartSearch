@@ -2,6 +2,9 @@ const { Schema, model } = require('mongoose');
 
 const ReportSchema = new Schema(
     {
+        name: String,
+        cpf: String,
+        arisp: String,
         arpenp: String,
         cadesp: String,
         caged: String,
@@ -10,7 +13,9 @@ const ReportSchema = new Schema(
         infocrim: String,
         jucesp: String,
         siel: String,
-        sivec: String
+        sivec: String,
+        apiError: Boolean,
+        fatalApiError: Boolean
     },
     {
         timestamps: true

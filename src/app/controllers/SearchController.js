@@ -1,5 +1,5 @@
 const { validationResult } = require('express-validator/check');
-const axios = require('axios');
+const ApisService = require('../service/ApisService');
 const Report = require('../models/Report');
 
 module.exports = {
@@ -17,55 +17,17 @@ module.exports = {
             });
         }
 
-        const { name, cpf, cnpj, email, phone } = req.body;
+        const { name, cpf } = req.body;
 
-        let response;
-        let apiError = false;
-        let fatalApiError = false;
-        const reportData = {};
+        const report = await Report.create({ name, cpf });
 
-        try {
-            const arpenp = await axios.post('https://smartsearchfiap.ddns.net/api/arpenp1', {
-                cnpj
-            });
+        // const apisService = new ApisService();
+        // apisService.callApis(req.body, report._id);
 
-            reportData.arpenp = JSON.stringify(arpenp.data);
-        } catch (error) {
-            apiError = true;
-        }
-
-        try {
-            const cadesp = await axios.post('https://smartsearchfiap.ddns.net/api/arpenp', {
-                cnpj
-            });
-
-            reportData.cadesp = JSON.stringify(cadesp.data);
-        } catch (error) {
-            apiError = true;
-        }
-
-        if (Object.entries(reportData).length !== 0) {
-            await Report.create(reportData);
-        } else {
-            fatalApiError = true;
-        }
-
-        if (fatalApiError) {
-            response = res.marko(require('../views/search/search.marko'), {
-                search: req.body,
-                fatalApiError: 'Falha ao buscar dados,'
-            });
-        } else if (apiError) {
-            response = res.marko(require('../views/search/search.marko'), {
-                search: req.body,
-                apiError: 'Alguns dados podem não ter sido gravados.'
-            });
-        } else {
-            response = res.marko(require('../views/search/search.marko'), {
-                search: req.body,
-                success: 'Pesquisa gerada com sucesso!'
-            });
-        }
+        response = res.marko(require('../views/search/search.marko'), {
+            search: req.body,
+            success: 'O relatório está sendo processado, acompanhe o progresso na aba "Relatórios"'
+        });
 
         return response;
     }

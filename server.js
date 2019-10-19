@@ -28,7 +28,8 @@ server.use(
 );
 
 mongoose.connect('mongodb+srv://henrique:asdarugina@cluster0-jsaku.mongodb.net/smartsearch?retryWrites=true&w=majority', {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useFindAndModify: false
 });
 
 auth(server);
