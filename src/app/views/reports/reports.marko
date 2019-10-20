@@ -31,7 +31,7 @@
                             <li class="breadcrumb-item active">Relatórios</li>
                         </ol>
                     </div>                    
-                </div>            
+                </div>
      
                 <!-- Page Content -->
                 <div class="row">                    
@@ -55,8 +55,26 @@
                                                     <td>${report.name}</td>
                                                     <td>${report.cpf}</td>
                                                     <td>${report.createdAt}</td>
-                                                    <td>                                                                                                            
-                                                        <a href=`/report/${report.id}` class="btn btn-primary"><i class="fa fa-eye"/></a>
+                                                    <td style="display: inline-flex;">
+                                                        <if (report.processing)>
+                                                            <div class="alert alert-warning">
+                                                                'Processando relatório!'
+                                                            </div>
+                                                        </if>
+                                                        <else-if (report.fatalApiError)>
+                                                            <div class="alert alert-danger">
+                                                                'Falha ao gerar relatório!'
+                                                            </div>
+                                                        </else-if>
+                                                        <else-if (report.apiError)>
+                                                            <a href=`/report/${report.id}` class="btn btn-primary" style="height: fit-content;"><i class="fa fa-eye"/></a>
+                                                            <div class="alert alert-warning" style="margin-left: 10px;">
+                                                                'Alguns dados não foram gravados!'
+                                                            </div>
+                                                        </else-if>                                                        
+                                                        <else>
+                                                            <a href=`/report/${report.id}` class="btn btn-primary"><i class="fa fa-eye"/></a>
+                                                        </else>
                                                     </td>
                                                 </tr>
                                             </for>

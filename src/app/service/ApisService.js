@@ -5,7 +5,7 @@ module.exports = class ApisService {
     async callApis(seachData, reportId) {
         const { name, cpf, cnpj, email, phone } = seachData;
 
-        const reportData = {};
+        const reportData = { processing: false };
 
         const apis = ['arisp', 'arpenp', 'cadesp', 'caged', 'censec', 'detran', 'infocrim', 'jucesp', 'siel', 'sivec'];
 
@@ -42,7 +42,7 @@ module.exports = class ApisService {
         if (Object.entries(reportData).length !== 0) {
             await Report.findByIdAndUpdate(reportId, reportData);
         } else {
-            await Report.findByIdAndUpdate(reportId, { fatalApiError: true });
+            await Report.findByIdAndUpdate(reportId, { fatalApiError: true, processing: false });
         }
     }
 };

@@ -4,7 +4,9 @@ const Formatters = require('../helpers/Formatters');
 
 module.exports = {
     async index(req, res) {
-        const reports = await Report.find();
+        const { name: user } = req.user;
+
+        const reports = await Report.find({ user });
 
         const formatedReports = reports.map(report => {
             const createdAt = formatDate('dd/MM/yyyy hh:mm', new Date(report.createdAt));
@@ -13,7 +15,10 @@ module.exports = {
                 name: report.name,
                 cpf: report.cpf,
                 createdAt,
-                id: report.id
+                id: report.id,
+                processing: report.processing,
+                apiError: report.apiError,
+                fatalApiError: report.fatalApiError
             };
         });
 
