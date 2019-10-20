@@ -19,7 +19,9 @@ module.exports = {
 
         const { name: user } = req.user;
 
-        const report = await Report.create({ user, processing: true });
+        const { name, cpf } = req.body;
+
+        const report = await Report.create({ user, name, cpf, processing: true });
 
         const apisService = new ApisService();
         apisService.callApis(req.body, report._id);
