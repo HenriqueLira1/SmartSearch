@@ -11,9 +11,7 @@ module.exports = class ApisService {
         const apis = ['arisp', 'arpenp', 'cadesp', 'caged', 'censec', 'detran', 'infocrim', 'jucesp', 'siel', 'sivec'];
 
         for (const api of apis) {
-            const apiParameters = {
-                key: 'QfatjqNAFBkAA40zON5z'
-            };
+            const apiParameters = {};
 
             switch (api) {
                 case 'arisp':
@@ -41,7 +39,12 @@ module.exports = class ApisService {
             }
 
             try {
-                const apiData = await axios.post(`https://smartsearchfiap.ddns.net/api/${api}`, apiParameters);
+                const apiData = await axios({
+                    method: 'post',
+                    url: `https://smartsearchfiap.ddns.net/api/${api}`,
+                    data: apiParameters,
+                    headers: { 'x-api-key': 'QfatjqNAFBkAA40zON5z' }
+                });
 
                 reportData[api] = JSON.stringify(apiData.data);
             } catch (error) {
