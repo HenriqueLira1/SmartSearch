@@ -1,12 +1,21 @@
 const Report = require('../models/Report');
+const User = require('../models/User');
 const formatDate = require('date-format');
 const Formatters = require('../helpers/Formatters');
 
 module.exports = {
     async index(req, res) {
-        const { name: user } = req.user;
+        const { name: user, email } = req.user;
 
-        const reports = await Report.find({ user });
+        const userModel = await User.findOne({ email });
+
+        let reports;
+
+        if (userModel.accessGroup === 1) {
+            reports = await Report.find();
+        } else {
+            reports = await Report.find({ user });
+        }
 
         const formatedReports = reports.map(report => {
             const createdAt = formatDate('dd/MM/yyyy hh:mm', new Date(report.createdAt));
