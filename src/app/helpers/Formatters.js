@@ -1,4 +1,4 @@
-module.exports = class ApisService {
+module.exports = class Formatters {
     static formatName(name) {
         return name.charAt(0).toUpperCase() + name.slice(1).replace(/_/g, ' ');
     }

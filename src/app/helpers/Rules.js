@@ -13,10 +13,10 @@ class Rules {
     }
     static validateSeach() {
         return [
-            check('cnpj')
+            check('cpf')
                 .not()
                 .isEmpty()
-                .withMessage('O CNPJ é obrigatório.')
+                .withMessage('O CPF é obrigatório.')
         ];
     }
 }
