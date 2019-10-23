@@ -35,7 +35,7 @@ module.exports = {
             }
         }
 
-        if (customErrors) {
+        if (customErrors.length > 0) {
             return res.marko(require('../views/search/search.marko'), {
                 search: req.body,
                 errors: customErrors
@@ -49,11 +49,9 @@ module.exports = {
         const apisService = new ApisService();
         apisService.callApis(req.body, report._id);
 
-        response = res.marko(require('../views/search/search.marko'), {
+        return res.marko(require('../views/search/search.marko'), {
             search: req.body,
             success: 'O relatório está sendo processado, acompanhe o progresso na aba "Relatórios"'
         });
-
-        return response;
     }
 };

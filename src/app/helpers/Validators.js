@@ -22,16 +22,16 @@ module.exports = class Validators {
             return false;
 
         // Valida DVs
-        tamanho = cnpj.length - 2;
-        numeros = cnpj.substring(0, tamanho);
-        digitos = cnpj.substring(tamanho);
-        soma = 0;
-        pos = tamanho - 7;
-        for (i = tamanho; i >= 1; i--) {
+        var tamanho = cnpj.length - 2;
+        var numeros = cnpj.substring(0, tamanho);
+        var digitos = cnpj.substring(tamanho);
+        var soma = 0;
+        var pos = tamanho - 7;
+        for (var i = tamanho; i >= 1; i--) {
             soma += numeros.charAt(tamanho - i) * pos--;
             if (pos < 2) pos = 9;
         }
-        resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+        var resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
         if (resultado != digitos.charAt(0)) return false;
 
         tamanho = tamanho + 1;
@@ -67,9 +67,9 @@ module.exports = class Validators {
         )
             return false;
         // Valida 1o digito
-        add = 0;
-        for (i = 0; i < 9; i++) add += parseInt(cpf.charAt(i)) * (10 - i);
-        rev = 11 - (add % 11);
+        var add = 0;
+        for (var i = 0; i < 9; i++) add += parseInt(cpf.charAt(i)) * (10 - i);
+        var rev = 11 - (add % 11);
         if (rev == 10 || rev == 11) rev = 0;
         if (rev != parseInt(cpf.charAt(9))) return false;
         // Valida 2o digito

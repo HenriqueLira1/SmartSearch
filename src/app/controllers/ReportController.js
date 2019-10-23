@@ -39,7 +39,20 @@ module.exports = {
 
         const formatedData = [];
 
-        const validProperties = ['arisp', 'arpenp', 'cadesp', 'caged', 'censec', 'detran', 'infocrim', 'jucesp', 'siel', 'sivec'];
+        const validProperties = [
+            'arisp',
+            'arpenp',
+            'cadesp',
+            'caged',
+            'censec',
+            'detran',
+            'infocrim',
+            'jucesp',
+            'siel',
+            'sivec',
+            'bolsa-familia',
+            'escavador'
+        ];
 
         for (const sourceName in report) {
             const isPropertyValid = validProperties.indexOf(sourceName) !== -1 && report[sourceName];

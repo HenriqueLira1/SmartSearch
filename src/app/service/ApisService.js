@@ -3,12 +3,12 @@ const Report = require('../models/Report');
 
 module.exports = class ApisService {
     async callApis(seachData, reportId) {
-        const { name, cpf, cnpj, businessName } = seachData;
+        const { name, cpf, cnpj, businessName, nis } = seachData;
 
         const reportData = { processing: false };
         let errorCounter = 0;
 
-        const apis = ['arisp', 'arpenp', 'cadesp', 'caged', 'censec', 'detran', 'infocrim', 'jucesp', 'siel', 'sivec'];
+        const apis = ['arisp', 'arpenp', 'cadesp', 'caged', 'censec', 'detran', 'infocrim', 'jucesp', 'siel', 'sivec', 'bolsa-familia', 'escavador'];
 
         for (const api of apis) {
             const apiParameters = {};
@@ -35,6 +35,25 @@ module.exports = class ApisService {
                 case 'jucesp':
                     apiParameters.nome_empresa = businessName;
                     apiParameters.cnpj = cnpj;
+                    break;
+                case 'bolsa-familia':
+                    const currentDate = new Date();
+                    const currentMonth = ('0' + (currentDate.getMonth() - 1)).slice(-2);
+                    const currentYear = currentDate.getFullYear();
+
+                    apiParameters.nis = nis;
+                    apiParameters.ano_mes_referencia = `${currentYear}${currentMonth}`;
+                    apiParameters.ano_mes_competencia = `${currentYear}${currentMonth}`;
+                    break;
+
+                case 'escavador':
+                    if (name) {
+                        apiParameters.term = name;
+                    } else if (cpf) {
+                        apiParameters.term = cpf;
+                    } else if (cnpj) {
+                        apiParameters.term = cnpj;
+                    }
                     break;
             }
 
