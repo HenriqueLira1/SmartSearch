@@ -17,6 +17,7 @@ const ReportSchema = new Schema(
         sivec: String,
         'bolsa-familia': String,
         escavador: String,
+        jusbrasil: String,
         processing: Boolean,
         apiError: Boolean,
         fatalApiError: Boolean

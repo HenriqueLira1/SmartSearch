@@ -8,7 +8,21 @@ module.exports = class ApisService {
         const reportData = { processing: false };
         let errorCounter = 0;
 
-        const apis = ['arisp', 'arpenp', 'cadesp', 'caged', 'censec', 'detran', 'infocrim', 'jucesp', 'siel', 'sivec', 'bolsa-familia', 'escavador'];
+        const apis = [
+            'arisp',
+            'arpenp',
+            'cadesp',
+            'caged',
+            'censec',
+            'detran',
+            'infocrim',
+            'jucesp',
+            'siel',
+            'sivec',
+            'bolsa-familia',
+            'escavador',
+            'jusbrasil'
+        ];
 
         for (const api of apis) {
             const apiParameters = {};
@@ -30,6 +44,7 @@ module.exports = class ApisService {
                     break;
                 case 'siel':
                 case 'sivec':
+                case 'jusbrasil':
                     apiParameters.nome_completo = name;
                     break;
                 case 'jucesp':

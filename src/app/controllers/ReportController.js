@@ -51,7 +51,8 @@ module.exports = {
             'siel',
             'sivec',
             'bolsa-familia',
-            'escavador'
+            'escavador',
+            'jusbrasil'
         ];
 
         for (const sourceName in report) {
