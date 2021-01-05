@@ -10,7 +10,7 @@
   "author": "Henrique Lira",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "body-parser": "1.18.3",
     "date-format": "^2.1.0",
     "express": "4.16.3",
